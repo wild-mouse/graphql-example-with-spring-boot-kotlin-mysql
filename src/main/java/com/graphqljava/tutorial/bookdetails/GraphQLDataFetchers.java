@@ -11,6 +11,42 @@ import java.util.Map;
 @Component
 public class GraphQLDataFetchers {
 
+    private static List<Map<String, String>> objects = Arrays.asList(
+            ImmutableMap.of("id", "object1",
+                    "sid", "sid1",
+                    "cid", "cid1",
+                    "url", "https://example.com/111"
+            ),
+            ImmutableMap.of("id", "object2",
+                    "sid", "sid2",
+                    "cid", "cid2",
+                    "url", "https://example.com/222"
+            ),
+            ImmutableMap.of("id", "object3",
+                    "sid", "sid3",
+                    "cid", "cid3",
+                    "url", "https://example.com/333"
+            )
+    );
+
+    private static List<Map<String, String>> attributes = Arrays.asList(
+            ImmutableMap.of("id", "attributes1",
+                    "object_id", "object1",
+                    "name", "hoge_name",
+                    "value", "hoge_value"
+            ),
+            ImmutableMap.of("id", "attributes2",
+                    "object_id", "object1",
+                    "name", "bar_name",
+                    "value", "bar_value"
+            ),
+            ImmutableMap.of("id", "attributes2",
+                    "object_id", "object2",
+                    "name", "foo_name",
+                    "value", "foo_value"
+            )
+    );
+
     private static List<Map<String, String>> books = Arrays.asList(
             ImmutableMap.of("id", "book-1",
                     "name", "Harry Potter and the Philosopher's Stone",
