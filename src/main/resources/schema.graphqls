@@ -3,6 +3,7 @@ type Query {
   objects: [Object]
   object: [Object]
   attributes: [Attribute]
+  tags: [Tag]
 }
 
 type Object {
@@ -11,6 +12,7 @@ type Object {
   cid: String
   url: String
   attributes: [Attribute]
+  tags: [Tag]
 }
 
 type Attribute {
@@ -18,6 +20,12 @@ type Attribute {
   object_id: String
   name: String
   value: String
+}
+
+type Tag {
+  id: ID
+  object_id: String
+  name: String
 }
 
 type Book { 

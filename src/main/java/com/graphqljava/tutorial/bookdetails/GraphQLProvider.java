@@ -21,7 +21,6 @@ import static graphql.schema.idl.TypeRuntimeWiring.newTypeWiring;
 @Component
 public class GraphQLProvider {
 
-
     @Autowired
     GraphQLDataFetchers graphQLDataFetchers;
 
@@ -47,9 +46,11 @@ public class GraphQLProvider {
                 .type(newTypeWiring("Query")
                         .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
                         .dataFetcher("objects", graphQLDataFetchers.getObjectsDataFetcher())
+                        .dataFetcher("tags", graphQLDataFetchers.getTagsDataFetcher())
                 )
                 .type(newTypeWiring("Object")
                         .dataFetcher("attributes", graphQLDataFetchers.getAttributesDataFetcher())
+                        .dataFetcher("tags", graphQLDataFetchers.getTagsByObjectIdDataFetcher())
                 )
                 .type(newTypeWiring("Book")
                         .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher()))

@@ -48,6 +48,33 @@ public class GraphQLDataFetchers {
             )
     );
 
+    private static List<Map<String, String>> tags = Arrays.asList(
+            ImmutableMap.of("id", "tag1",
+                    "object_id", "object1",
+                    "name", "hoge_tag"
+            ),
+            ImmutableMap.of("id", "tag2",
+                    "object_id", "object1",
+                    "name", "foo_tag"
+            ),
+            ImmutableMap.of("id", "tag3",
+                    "object_id", "object1",
+                    "name", "bar_tag"
+            ),
+            ImmutableMap.of("id", "tag1",
+                    "object_id", "object2",
+                    "name", "hoge_tag"
+            ),
+            ImmutableMap.of("id", "tag2",
+                    "object_id", "object2",
+                    "name", "foo_tag"
+            ),
+            ImmutableMap.of("id", "tag3",
+                    "object_id", "object3",
+                    "name", "bar_tag"
+            )
+    );
+
     private static List<Map<String, String>> books = Arrays.asList(
             ImmutableMap.of("id", "book-1",
                     "name", "Harry Potter and the Philosopher's Stone",
@@ -79,18 +106,6 @@ public class GraphQLDataFetchers {
         return dataFetchingEnvironment -> objects;
     }
 
-    DataFetcher getAttributeDataFetcher() {
-        return dataFetchingEnvironment -> {
-            Map<String, String> book = dataFetchingEnvironment.getSource();
-            String objectId = book.get("id");
-            return attributes
-                    .stream()
-                    .filter(attribute -> attribute.get("object_id").equals(objectId))
-                    .findFirst()
-                    .orElse(null);
-        };
-    }
-
     DataFetcher getAttributesDataFetcher() {
         return dataFetchingEnvironment -> {
             Map<String, String> book = dataFetchingEnvironment.getSource();
@@ -98,6 +113,21 @@ public class GraphQLDataFetchers {
             return attributes
                     .stream()
                     .filter(attribute -> attribute.get("object_id").equals(objectId))
+                    .collect(Collectors.toList());
+        };
+    }
+
+    DataFetcher getTagsDataFetcher() {
+        return dataFetchingEnvironment -> tags;
+    }
+
+    DataFetcher getTagsByObjectIdDataFetcher() {
+        return dataFetchingEnvironment -> {
+            Map<String, String> object = dataFetchingEnvironment.getSource();
+            String objectId = object.get("id");
+            return tags
+                    .stream()
+                    .filter(tag -> tag.get("object_id").equals(objectId))
                     .collect(Collectors.toList());
         };
     }
