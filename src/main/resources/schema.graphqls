@@ -1,5 +1,23 @@
 type Query { 
   bookById(id: ID): Book
+  objects: [Object]
+  object: [Object]
+  attributes: [Attribute]
+}
+
+type Object {
+  id: ID
+  sid: String
+  cid: String
+  url: String
+  attributes: [Attribute]
+}
+
+type Attribute {
+  id: ID
+  object_id: String
+  name: String
+  value: String
 }
 
 type Book { 
