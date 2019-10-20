@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component
@@ -19,14 +20,24 @@ public class GraphQLDataFetchers {
                     "url", "https://example.com/111"
             ),
             ImmutableMap.of("id", "object2",
-                    "sid", "sid2",
+                    "sid", "sid1",
                     "cid", "cid2",
                     "url", "https://example.com/222"
             ),
             ImmutableMap.of("id", "object3",
-                    "sid", "sid3",
+                    "sid", "sid1",
                     "cid", "cid3",
                     "url", "https://example.com/333"
+            ),
+            ImmutableMap.of("id", "object4",
+                    "sid", "sid2",
+                    "cid", "cid4",
+                    "url", "https://example.com/444"
+            ),
+            ImmutableMap.of("id", "object5",
+                    "sid", "sid3",
+                    "cid", "cid5",
+                    "url", "https://example.com/555"
             )
     );
 
@@ -103,7 +114,25 @@ public class GraphQLDataFetchers {
     );
 
     DataFetcher getObjectsDataFetcher() {
-        return dataFetchingEnvironment -> objects;
+        return dataFetchingEnvironment -> {
+            String sid = dataFetchingEnvironment.getArgument("sid");
+            String cid = dataFetchingEnvironment.getArgument("cid");
+            return objects
+                    .stream()
+                    .filter(object -> {
+                        if (sid == null) {
+                            return true;
+                        }
+                        return object.get("sid").equals(sid);
+                    })
+                    .filter(object -> {
+                        if (cid == null) {
+                            return true;
+                        }
+                        return object.get("cid").equals(cid);
+                    })
+                    .collect(Collectors.toList());
+        } ;
     }
 
     DataFetcher getAttributesDataFetcher() {

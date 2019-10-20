@@ -1,6 +1,6 @@
 type Query { 
   bookById(id: ID): Book
-  objects: [Object]
+  objects(sid: String, cid: String): [Object]
   object: [Object]
   attributes: [Attribute]
   tags: [Tag]
