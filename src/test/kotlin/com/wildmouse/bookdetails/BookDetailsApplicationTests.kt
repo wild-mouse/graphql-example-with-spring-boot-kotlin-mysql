@@ -1,4 +1,4 @@
-package com.graphqljava.tutorial.bookdetails
+package com.wildmouse.bookdetails
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

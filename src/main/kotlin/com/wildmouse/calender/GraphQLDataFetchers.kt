@@ -1,4 +1,4 @@
-package com.graphqljava.tutorial.bookdetails
+package com.wildmouse.calender
 
 import com.google.common.collect.ImmutableMap
 import graphql.schema.DataFetcher

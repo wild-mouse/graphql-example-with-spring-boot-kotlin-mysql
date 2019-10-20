@@ -1,4 +1,4 @@
-package com.graphqljava.tutorial.bookdetails.controller
+package com.wildmouse.calender.controller
 
 import com.fasterxml.jackson.core.type.TypeReference
 import com.fasterxml.jackson.databind.ObjectMapper
