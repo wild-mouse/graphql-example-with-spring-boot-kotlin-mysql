@@ -1,6 +1,8 @@
 package com.wildmouse.calender.fetchers
 
 import com.google.common.collect.ImmutableMap
+import com.wildmouse.calender.entity.Category
+import com.wildmouse.calender.repository.CategoryRepository
 import graphql.schema.DataFetcher
 import graphql.schema.DataFetchingEnvironment
 import org.springframework.stereotype.Component
@@ -9,7 +11,9 @@ import java.util.Arrays
 import java.util.stream.Collectors
 
 @Component
-class GraphQLDataFetchers {
+class GraphQLDataFetchers (
+        private val categoryRepository: CategoryRepository
+){
 
     internal val schedulesDataFetcher: DataFetcher<*> =
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
@@ -37,8 +41,10 @@ class GraphQLDataFetchers {
                         .collect(Collectors.toList())
             }
 
-    internal val categoriesDataFetcher: DataFetcher<*> =
-            DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment -> categories }
+    internal val categoriesDataFetcher: DataFetcher<List<Category>> =
+            DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
+                categoryRepository.findAll()
+             }
 
     internal val categoriesByScheduleIdDataFetcher: DataFetcher<*> =
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
