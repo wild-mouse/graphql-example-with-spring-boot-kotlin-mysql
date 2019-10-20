@@ -44,16 +44,13 @@ public class GraphQLProvider {
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
                 .type(newTypeWiring("Query")
-                        .dataFetcher("bookById", graphQLDataFetchers.getBookByIdDataFetcher())
-                        .dataFetcher("objects", graphQLDataFetchers.getObjectsDataFetcher())
-                        .dataFetcher("tags", graphQLDataFetchers.getTagsDataFetcher())
+                        .dataFetcher("schedules", graphQLDataFetchers.getSchedulesDataFetcher())
+                        .dataFetcher("categories", graphQLDataFetchers.getCategoriesDataFetcher())
                 )
-                .type(newTypeWiring("Object")
-                        .dataFetcher("attributes", graphQLDataFetchers.getAttributesDataFetcher())
-                        .dataFetcher("tags", graphQLDataFetchers.getTagsByObjectIdDataFetcher())
+                .type(newTypeWiring("Schedule")
+                        .dataFetcher("additionalInformation", graphQLDataFetchers.getAdditionalInformationByScheduleIdDataFetcher())
+                        .dataFetcher("categories", graphQLDataFetchers.getCategoriesByScheduleIdDataFetcher())
                 )
-                .type(newTypeWiring("Book")
-                        .dataFetcher("author", graphQLDataFetchers.getAuthorDataFetcher()))
                 .build();
     }
 

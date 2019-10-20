@@ -1,43 +1,26 @@
 type Query { 
-  bookById(id: ID): Book
-  objects(sid: String, cid: String): [Object]
-  object: [Object]
-  attributes: [Attribute]
-  tags: [Tag]
+  schedules(name: String, allDay: String): [Schedule]
+  categories: [Category]
 }
 
-type Object {
+type Schedule {
   id: ID
-  sid: String
-  cid: String
-  url: String
-  attributes: [Attribute]
-  tags: [Tag]
+  name: String
+  date: String
+  allDay: String
+  additionalInformation: [AdditionalInformation]
+  categories: [Category]
 }
 
-type Attribute {
+type AdditionalInformation {
   id: ID
-  object_id: String
+  scheduleId: String
   name: String
   value: String
 }
 
-type Tag {
+type Category {
   id: ID
-  object_id: String
+  scheduleId: String
   name: String
 }
-
-type Book { 
-  id: ID
-  name: String
-  pageCount: Int
-  author: Author
-}
-
-type Author { 
-  id: ID
-  firstName: String
-  lastName: String
-}
-
