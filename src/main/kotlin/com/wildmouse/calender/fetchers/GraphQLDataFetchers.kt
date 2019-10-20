@@ -1,4 +1,4 @@
-package com.wildmouse.calender
+package com.wildmouse.calender.fetchers
 
 import com.google.common.collect.ImmutableMap
 import graphql.schema.DataFetcher

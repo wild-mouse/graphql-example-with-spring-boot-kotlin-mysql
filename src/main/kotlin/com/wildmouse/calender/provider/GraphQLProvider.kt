@@ -2,7 +2,7 @@ package com.wildmouse.calender.provider
 
 import com.google.common.base.Charsets
 import com.google.common.io.Resources
-import com.wildmouse.calender.GraphQLDataFetchers
+import com.wildmouse.calender.fetchers.GraphQLDataFetchers
 import graphql.GraphQL
 import graphql.schema.GraphQLSchema
 import graphql.schema.idl.RuntimeWiring
