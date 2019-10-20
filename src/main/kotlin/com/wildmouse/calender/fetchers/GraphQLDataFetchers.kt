@@ -1,8 +1,12 @@
 package com.wildmouse.calender.fetchers
 
 import com.google.common.collect.ImmutableMap
+import com.wildmouse.calender.entity.AdditionalInformation
 import com.wildmouse.calender.entity.Category
+import com.wildmouse.calender.entity.Schedule
+import com.wildmouse.calender.repository.AdditionalInformationRepository
 import com.wildmouse.calender.repository.CategoryRepository
+import com.wildmouse.calender.repository.ScheduleRepository
 import graphql.schema.DataFetcher
 import graphql.schema.DataFetchingEnvironment
 import org.springframework.stereotype.Component
@@ -12,32 +16,35 @@ import java.util.stream.Collectors
 
 @Component
 class GraphQLDataFetchers (
+        private val scheduleRepository: ScheduleRepository,
+        private val additionalInformationRepository: AdditionalInformationRepository,
         private val categoryRepository: CategoryRepository
 ){
 
-    internal val schedulesDataFetcher: DataFetcher<*> =
+    internal val schedulesDataFetcher: DataFetcher<List<Schedule>> =
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
                 val name = dataFetchingEnvironment.getArgument<String>("name")
                 val allDay = dataFetchingEnvironment.getArgument<String>("allDay")
-                schedules
+
+                scheduleRepository.findAll()
                         .stream()
                         .filter { schedule ->
-                            if (name == null) true else schedule["name"] == name
+                            if (name == null) true else schedule.name == name
                         }
                         .filter { schedule ->
                             if (allDay == null) true
-                            else schedule["allDay"] == allDay
+                            else schedule.allDay == allDay
                         }
                         .collect(Collectors.toList())
             }
 
-    internal val additionalInformationByScheduleIdDataFetcher: DataFetcher<*> =
+    internal val additionalInformationByScheduleIdDataFetcher: DataFetcher<List<AdditionalInformation>> =
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
-                val schedule = dataFetchingEnvironment.getSource<Map<String, String>>()
-                val scheduleId = schedule.get("id")
-                additionalInformation
+                val schedule = dataFetchingEnvironment.getSource<Schedule>()
+                val scheduleId = schedule.id
+                additionalInformationRepository.findAll()
                         .stream()
-                        .filter { additionalInfo -> additionalInfo["scheduleId"] == scheduleId }
+                        .filter { it.scheduleId == scheduleId }
                         .collect(Collectors.toList())
             }
 
