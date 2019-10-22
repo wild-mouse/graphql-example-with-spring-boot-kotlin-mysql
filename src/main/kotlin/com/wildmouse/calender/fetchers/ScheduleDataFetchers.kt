@@ -2,7 +2,6 @@ package com.wildmouse.calender.fetchers
 
 import com.wildmouse.calender.entity.Schedule
 import com.wildmouse.calender.mapper.SchedulesMapper
-import com.wildmouse.calender.repository.ScheduleRepository
 import graphql.schema.DataFetcher
 import graphql.schema.DataFetchingEnvironment
 import org.springframework.stereotype.Component
