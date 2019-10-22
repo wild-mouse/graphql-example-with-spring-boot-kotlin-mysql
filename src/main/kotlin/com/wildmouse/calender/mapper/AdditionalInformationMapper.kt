@@ -8,4 +8,6 @@ interface AdditionalInformationMapper {
 
     fun getAdditionalInformationList(): List<AdditionalInformation>
 
+    fun getAdditionalInformationListByScheduleId(scheduleId: Long): List<AdditionalInformation>
+
 }

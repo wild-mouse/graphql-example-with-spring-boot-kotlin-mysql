@@ -10,16 +10,13 @@ import org.springframework.stereotype.Component
 import java.util.stream.Collectors
 
 @Component
-class AdditionalInformationDataFetchers (
+class AdditionalInformationDataFetchers(
         private val additionalInformationMapper: AdditionalInformationMapper
-){
+) {
     internal val additionalInformationByScheduleIdDataFetcher: DataFetcher<List<AdditionalInformation>> =
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
                 val schedule = dataFetchingEnvironment.getSource<Schedule>()
                 val scheduleId = schedule.id
-                additionalInformationMapper.getAdditionalInformationList()
-                        .stream()
-                        .filter { it.scheduleId == scheduleId }
-                        .collect(Collectors.toList())
+                additionalInformationMapper.getAdditionalInformationListByScheduleId(scheduleId)
             }
 }

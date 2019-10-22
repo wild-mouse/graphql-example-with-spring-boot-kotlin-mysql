@@ -11,6 +11,17 @@
     </resultMap>
 
     <select id="getAdditionalInformationList" resultMap="additionalInformationMap">
-        select * from additional_information
+        select *
+        from additional_information
+    </select>
+
+    <select
+            id="getAdditionalInformationListByScheduleId"
+            parameterType="long"
+            resultMap="additionalInformationMap"
+    >
+        select *
+        from additional_information
+        where additional_information.schedule_id = #{scheduleId}
     </select>
 </mapper>
