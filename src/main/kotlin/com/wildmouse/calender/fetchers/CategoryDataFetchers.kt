@@ -24,10 +24,7 @@ class CategoryDataFetchers(
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
                 val schedule = dataFetchingEnvironment.getSource<Schedule>()
                 val scheduleId = schedule.id
-                categories
-                        .stream()
-                        .filter { category -> category["scheduleId"] == scheduleId.toString() }
-                        .collect(Collectors.toList())
+                categoriesMapper.getCategoriesByScheduleId(scheduleId)
             }
 
     companion object {

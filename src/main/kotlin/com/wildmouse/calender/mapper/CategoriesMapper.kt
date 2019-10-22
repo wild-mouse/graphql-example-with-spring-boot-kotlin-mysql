@@ -8,4 +8,6 @@ interface CategoriesMapper {
 
     fun getCategories(): List<Category>
 
+    fun getCategoriesByScheduleId(scheduleId: Long): List<Category>
+
 }

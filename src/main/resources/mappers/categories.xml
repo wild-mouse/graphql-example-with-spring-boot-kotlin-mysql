@@ -11,4 +11,11 @@
     <select id="getCategories" resultMap="categoryMap">
         select * from categories
     </select>
+
+    <select id="getCategoriesByScheduleId" parameterType="long" resultMap="categoryMap">
+        select c.*
+        from schedules_categories sc
+                 left join categories as c on c.id = sc.category_id
+        where sc.schedule_id = #{scheduleId}
+    </select>
 </mapper>
