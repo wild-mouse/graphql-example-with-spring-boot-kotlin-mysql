@@ -17,7 +17,11 @@ class CategoryDataFetchers(
 ) {
     internal val categoriesDataFetcher: DataFetcher<List<Category>> =
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
+                val names = dataFetchingEnvironment.getArgument<List<String>?>("names")
+
                 categoriesMapper.getCategories()
+                        .filter { names?.contains(it.name) ?: true }
+                        .toList()
             }
 
     internal val categoriesByScheduleIdDataFetcher: DataFetcher<*> =
