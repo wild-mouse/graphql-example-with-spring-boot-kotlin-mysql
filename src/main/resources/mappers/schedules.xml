@@ -9,6 +9,16 @@
         <result column="schedule_date" property="date"/>
         <result column="schedule_all_day" property="allDay"/>
         <collection
+                property="additionalInformationList"
+                ofType="com.wildmouse.calender.entity.AdditionalInformation"
+                javaType="ArrayList"
+        >
+            <id column="additional_information_id" property="id"/>
+            <result column="additional_information_schedule_id" property="scheduleId"/>
+            <result column="additional_information_name" property="name"/>
+            <result column="additional_information_value" property="value"/>
+        </collection>
+        <collection
                 property="categories"
                 ofType="com.wildmouse.calender.entity.Category"
                 javaType="ArrayList"
@@ -23,9 +33,15 @@
                s.name    AS schedule_name,
                s.date    AS schedule_date,
                s.all_day AS schedule_all_day,
+               ai.id AS additional_information_id,
+               ai.schedule_id AS additional_information_schedule_id,
+               ai.name AS additional_information_name,
+               ai.value AS additional_information_value,
                c.id      AS category_id,
                c.name    AS category_name
         from calendar.schedules s
+                 left join calendar.additional_information ai
+                           on s.id = ai.schedule_id
                  left join calendar.schedules_categories sc
                            on s.id = sc.schedule_id
                  left join calendar.categories c

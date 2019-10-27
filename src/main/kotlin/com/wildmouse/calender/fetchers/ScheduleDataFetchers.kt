@@ -16,6 +16,13 @@ class ScheduleDataFetchers(
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
                 val name = dataFetchingEnvironment.getArgument<String>("name")
                 val allDay = dataFetchingEnvironment.getArgument<String>("allDay")
+                val hasAdditionalInformationList = dataFetchingEnvironment.getArgument<List<String>?>("hasAdditionalInformationList")
+                        ?.map {
+                            // TODO: Fix for url contains colon
+                            val keyValue = it.split(":")
+                            // TODO: Trim spaces
+                            Pair(keyValue.first(), keyValue.last())
+                        }
                 val hasCategoryNames = dataFetchingEnvironment.getArgument<List<String>?>("hasCategoryNames")
 
                 schedulesMapper.getSchedules()
@@ -28,6 +35,9 @@ class ScheduleDataFetchers(
                             else schedule.allDay == allDay
                         }
                         .filter { schedule ->
+                            isAllInfoContained(hasAdditionalInformationList, schedule)
+                        }
+                        .filter { schedule ->
                             hasCategoryNames?.all { categoryName ->
                                 schedule.categories.any { category ->
                                     category.name == categoryName
@@ -36,4 +46,16 @@ class ScheduleDataFetchers(
                         }
                         .collect(Collectors.toList())
             }
+
+    fun isAllInfoContained(
+            hasAdditionalInformationList: List<Pair<String, String>>?,
+            schedule: Schedule
+    ): Boolean = hasAdditionalInformationList?.all { target ->
+        schedule.additionalInformationList
+                .find { it.name == target.first }
+                .let {
+                    if (it == null) false
+                    else it.value == target.second
+                }
+    } ?: true
 }

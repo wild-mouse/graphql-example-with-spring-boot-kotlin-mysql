@@ -2,6 +2,7 @@ type Query {
   schedules(
     name: String
     allDay: String
+    hasAdditionalInformationList: [String!]
     hasCategoryNames: [String!]
   ): [Schedule]
   categories(names: [String!]): [Category]

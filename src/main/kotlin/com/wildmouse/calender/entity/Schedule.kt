@@ -10,6 +10,8 @@ data class Schedule(
         var date: String = "",
         var allDay: String = "",
         @Transient
+        var additionalInformationList: List<AdditionalInformation> = mutableListOf(),
+        @Transient
         var categories: List<Category> = mutableListOf(),
         @Id
         var id: Long = 0L
