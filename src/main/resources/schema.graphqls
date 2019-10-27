@@ -1,5 +1,9 @@
 type Query { 
-  schedules(name: String, allDay: String): [Schedule]
+  schedules(
+    name: String
+    allDay: String
+    hasCategoryNames: [String!]
+  ): [Schedule]
   categories(names: [String!]): [Category]
 }
 

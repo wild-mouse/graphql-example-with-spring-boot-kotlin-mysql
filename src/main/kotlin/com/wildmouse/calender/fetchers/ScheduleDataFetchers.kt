@@ -16,6 +16,7 @@ class ScheduleDataFetchers(
             DataFetcher { dataFetchingEnvironment: DataFetchingEnvironment ->
                 val name = dataFetchingEnvironment.getArgument<String>("name")
                 val allDay = dataFetchingEnvironment.getArgument<String>("allDay")
+                val hasCategoryNames = dataFetchingEnvironment.getArgument<List<String>?>("hasCategoryNames")
 
                 schedulesMapper.getSchedules()
                         .stream()
@@ -25,6 +26,13 @@ class ScheduleDataFetchers(
                         .filter { schedule ->
                             if (allDay == null) true
                             else schedule.allDay == allDay
+                        }
+                        .filter { schedule ->
+                            hasCategoryNames?.all { categoryName ->
+                                schedule.categories.any { category ->
+                                    category.name == categoryName
+                                }
+                            } ?: true
                         }
                         .collect(Collectors.toList())
             }
