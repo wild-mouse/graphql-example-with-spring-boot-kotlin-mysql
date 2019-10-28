@@ -5,6 +5,7 @@ import com.google.common.io.Resources
 import com.wildmouse.calender.fetchers.AdditionalInformationDataFetchers
 import com.wildmouse.calender.fetchers.CategoryDataFetchers
 import com.wildmouse.calender.fetchers.ScheduleDataFetchers
+import com.wildmouse.calender.mutators.CategoryMutators
 import graphql.GraphQL
 import graphql.schema.GraphQLSchema
 import graphql.schema.idl.RuntimeWiring
@@ -22,6 +23,7 @@ import graphql.schema.idl.TypeRuntimeWiring.newTypeWiring
 class GraphQLProvider(
         private val additionalInformationDataFetchers: AdditionalInformationDataFetchers,
         private val categoryDataFetchers: CategoryDataFetchers,
+        private val categoryMutators: CategoryMutators,
         private val scheduleDataFetchers: ScheduleDataFetchers
 ) {
     private var graphQL: GraphQL? = null
@@ -47,6 +49,9 @@ class GraphQLProvider(
                 .type(newTypeWiring("Query")
                         .dataFetcher("schedules", scheduleDataFetchers.schedulesDataFetcher)
                         .dataFetcher("categories", categoryDataFetchers.categoriesDataFetcher)
+                )
+                .type(newTypeWiring("Mutation")
+                        .dataFetcher("addCategory", categoryMutators.addCategory)
                 )
                 .type(newTypeWiring("Schedule")
                         .dataFetcher(

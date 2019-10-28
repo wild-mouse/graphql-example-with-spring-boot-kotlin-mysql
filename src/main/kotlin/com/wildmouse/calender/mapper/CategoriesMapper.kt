@@ -10,4 +10,5 @@ interface CategoriesMapper {
 
     fun getCategoriesByScheduleId(scheduleId: Long): List<Category>
 
+    fun addCategory(category: Category)
 }

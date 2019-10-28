@@ -1,4 +1,4 @@
-type Query { 
+type Query {
   schedules(
     name: String
     allDay: String
@@ -6,6 +6,24 @@ type Query {
     hasCategoryNames: [String!]
   ): [Schedule]
   categories(names: [String!]): [Category]
+}
+
+input AdditionalInformationInput {
+  key: String!
+  value: String!
+}
+
+type Mutation {
+  addCategory(name: String!): Category!
+  addAttribute(attribute: AdditionalInformationInput!): Category!
+  replaceScheduleAdditionalInformation(
+    scheduleId: ID!,
+    additionalInformationList: [AdditionalInformationInput!]!
+  ): Schedule!
+  replaceSchecduleCategories(
+    scheduleId: ID!,
+    categoryNames: [String!]
+  ): Schedule!
 }
 
 type Schedule {

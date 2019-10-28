@@ -18,4 +18,11 @@
                  left join categories as c on c.id = sc.category_id
         where sc.schedule_id = #{scheduleId}
     </select>
+
+    <insert id="addCategory"
+            parameterType="com.wildmouse.calender.entity.Category"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO categories (name) VALUES(#{name})
+    </insert>
 </mapper>
