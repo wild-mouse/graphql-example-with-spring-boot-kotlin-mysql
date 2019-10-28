@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wildmouse.calender.mapper.CategoriesMapper">
-    <resultMap type="com.wildmouse.calender.entity.Category" id="categoryMap">
+    <resultMap type="com.wildmouse.calender.domain.entity.Category" id="categoryMap">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
     </resultMap>
@@ -20,7 +20,7 @@
     </select>
 
     <insert id="addCategory"
-            parameterType="com.wildmouse.calender.entity.Category"
+            parameterType="com.wildmouse.calender.domain.entity.Category"
             useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO categories (name) VALUES(#{name})

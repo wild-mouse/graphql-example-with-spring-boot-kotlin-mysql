@@ -1,7 +1,7 @@
 package com.wildmouse.calender.fetchers
 
-import com.wildmouse.calender.entity.Category
-import com.wildmouse.calender.entity.Schedule
+import com.wildmouse.calender.domain.entity.Category
+import com.wildmouse.calender.domain.entity.Schedule
 import com.wildmouse.calender.mapper.CategoriesMapper
 import graphql.schema.DataFetcher
 import graphql.schema.DataFetchingEnvironment

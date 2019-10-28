@@ -1,6 +1,6 @@
 package com.wildmouse.calender.mapper
 
-import com.wildmouse.calender.entity.Category
+import com.wildmouse.calender.domain.entity.Category
 import org.apache.ibatis.annotations.Mapper
 
 @Mapper

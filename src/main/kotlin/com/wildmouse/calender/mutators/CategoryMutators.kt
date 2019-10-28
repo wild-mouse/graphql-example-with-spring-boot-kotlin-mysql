@@ -1,6 +1,6 @@
 package com.wildmouse.calender.mutators
 
-import com.wildmouse.calender.entity.Category
+import com.wildmouse.calender.domain.entity.Category
 import com.wildmouse.calender.mapper.CategoriesMapper
 import graphql.schema.DataFetcher
 import org.springframework.stereotype.Component

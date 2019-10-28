@@ -3,14 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wildmouse.calender.mapper.SchedulesMapper">
-    <resultMap type="com.wildmouse.calender.entity.Schedule" id="scheduleMap">
+    <resultMap type="com.wildmouse.calender.domain.entity.Schedule" id="scheduleMap">
         <id column="schedule_id" property="id"/>
         <result column="schedule_name" property="name"/>
         <result column="schedule_date" property="date"/>
         <result column="schedule_all_day" property="allDay"/>
         <collection
                 property="additionalInformationList"
-                ofType="com.wildmouse.calender.entity.AdditionalInformation"
+                ofType="com.wildmouse.calender.domain.entity.AdditionalInformation"
                 javaType="ArrayList"
         >
             <id column="additional_information_id" property="id"/>
@@ -20,7 +20,7 @@
         </collection>
         <collection
                 property="categories"
-                ofType="com.wildmouse.calender.entity.Category"
+                ofType="com.wildmouse.calender.domain.entity.Category"
                 javaType="ArrayList"
         >
             <id column="category_id" property="id"/>

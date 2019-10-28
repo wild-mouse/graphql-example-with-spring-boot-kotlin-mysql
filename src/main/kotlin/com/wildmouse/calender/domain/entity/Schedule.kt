@@ -1,4 +1,4 @@
-package com.wildmouse.calender.entity
+package com.wildmouse.calender.domain.entity
 
 import javax.persistence.*
 import kotlin.jvm.Transient

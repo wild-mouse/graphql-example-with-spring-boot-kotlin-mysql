@@ -1,8 +1,8 @@
 package com.wildmouse.calender.controller
 
-import com.wildmouse.calender.entity.AdditionalInformation
-import com.wildmouse.calender.entity.Category
-import com.wildmouse.calender.entity.Schedule
+import com.wildmouse.calender.domain.entity.AdditionalInformation
+import com.wildmouse.calender.domain.entity.Category
+import com.wildmouse.calender.domain.entity.Schedule
 import com.wildmouse.calender.mapper.AdditionalInformationMapper
 import com.wildmouse.calender.mapper.CategoriesMapper
 import com.wildmouse.calender.mapper.SchedulesMapper

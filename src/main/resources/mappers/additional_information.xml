@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.wildmouse.calender.mapper.AdditionalInformationMapper">
-    <resultMap type="com.wildmouse.calender.entity.AdditionalInformation" id="additionalInformationMap">
+    <resultMap type="com.wildmouse.calender.domain.entity.AdditionalInformation" id="additionalInformationMap">
         <id column="id" property="id"/>
         <result column="schedule_id" property="scheduleId"/>
         <result column="name" property="name"/>
